@@ -10,7 +10,7 @@ namespace AppGetSendJson
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new View.Listagem());
         }
 
         protected override void OnStart()

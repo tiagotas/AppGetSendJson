@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace AppGetSendJson
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace AppGetSendJson.View
 {
-    public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class FormEditar : ContentPage
     {
-        public MainPage()
+        public FormEditar()
         {
             InitializeComponent();
         }
