@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +8,13 @@ namespace AppGetSendJson.Service
 {
     public class DataService
     {
-        protected static readonly string servidor = "http://10.0.2.2:8000";
+        private static readonly string servidor = "http://10.0.2.2:8000";
 
-        protected static async Task<string> GetDataFromService(string queryString)
+        protected static async Task<string> GetDataFromService(string rota)
         {
             string json_response;
+
+            string uri = servidor+ rota;
 
             var current = Connectivity.NetworkAccess;
 
@@ -25,7 +25,7 @@ namespace AppGetSendJson.Service
 
             using (HttpClient client = new HttpClient())
             {
-                HttpResponseMessage response = await client.GetAsync(queryString);
+                HttpResponseMessage response = await client.GetAsync(uri);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -42,9 +42,11 @@ namespace AppGetSendJson.Service
         /**
          * Método que envia os dados para o servidor via post
          */
-        protected static async Task<string> PostDataToService(string json_object, string uri)
+        protected static async Task<string> PostDataToService(string json_object, string rota)
         {
             string json_response;
+
+            string uri = servidor+ rota;
 
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {

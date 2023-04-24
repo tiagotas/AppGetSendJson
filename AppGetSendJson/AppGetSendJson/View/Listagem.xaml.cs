@@ -81,5 +81,62 @@ namespace AppGetSendJson.View
                 act_carregando.IsRunning = false;
             }
         }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            act_carregando.IsRunning = true;
+            act_carregando.IsVisible = true;
+
+            try
+            {
+                List<Pessoa> temp = await DataServicePessoa.SearchAsync(txt_q.Text);
+
+                ListaPessoas.Clear();
+
+                foreach (Pessoa item in temp)
+                {
+                    ListaPessoas.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ops", ex.Message, "OK");
+
+            }
+            finally
+            {
+                act_carregando.IsRunning = false;
+                act_carregando.IsVisible = false;
+            }
+
+        }
+
+        private async void MenuItem_Clicked(object sender, EventArgs e)
+        {
+            act_carregando.IsRunning = true;
+            act_carregando.IsVisible = true;
+
+            try
+            {
+                
+                MenuItem menu = sender as MenuItem;
+                Pessoa pessoa_selecionada = menu.BindingContext as Pessoa;
+
+                await DataServicePessoa.DeleteAsync(pessoa_selecionada.Id);
+
+                ListaPessoas.Remove(pessoa_selecionada);
+
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ops", ex.Message, "OK");
+
+            }
+            finally
+            {
+                act_carregando.IsRunning = false;
+                act_carregando.IsVisible = false;
+            }
+        }
     }
 }

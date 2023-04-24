@@ -12,7 +12,7 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal">
                 <SearchBar x:Name="txt_q" />
-                <Button Text="Buscar" />
+                <Button Text="Buscar" Clicked="Button_Clicked" />
             </StackLayout>
 
             <ActivityIndicator x:Name="act_carregando" />
@@ -27,7 +27,11 @@
                 </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate>
+                        
                         <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Remover" Clicked="MenuItem_Clicked" />
+                            </ViewCell.ContextActions>
                             <Grid ColumnDefinitions="Auto, *, Auto">
                                 <Label Grid.Column="0" Text="{Binding Id}" />
                                 <Label Grid.Column="1" Text="{Binding Nome}" />
