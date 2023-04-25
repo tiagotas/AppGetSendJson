@@ -23,13 +23,15 @@ namespace AppGetSendJson.Service
         /**
          * Envia um Model em forma de JSON ara insert no banco.
          */
-        public static async Task<bool> Cadastrar(Pessoa c)
+        public static async Task<Pessoa> Cadastrar(Pessoa c)
         {
             var json_a_enviar = JsonConvert.SerializeObject(c);
 
             string json = await DataService.PostDataToService(json_a_enviar, "/pessoa/salvar");
 
-            return true;
+            Pessoa p = JsonConvert.DeserializeObject<Pessoa>(json);
+
+            return p;
         }
 
         /**

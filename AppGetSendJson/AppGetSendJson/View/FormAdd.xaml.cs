@@ -26,13 +26,15 @@ namespace AppGetSendJson.View
 
             try
             {
-                await DataServicePessoa.Cadastrar(new Pessoa
+                Pessoa p = await DataServicePessoa.Cadastrar(new Pessoa
                 {
                     Nome = txt_nome.Text,
                     Data_Nasc = dtpck_data_nasc.Date
                 });
 
-                await DisplayAlert("Sucesso!", "Nova pessoa Inserida", "OK");
+                string msg = $"Pessoa inserida com sucesso. Código gerado: {p.Id} ";
+
+                await DisplayAlert("Sucesso!", msg, "OK");
 
                 await Navigation.PushAsync(new View.Listagem());
             }
